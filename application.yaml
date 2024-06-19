@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/billanel/ArgoCD'
+    repoURL: 'https://github.com/billanel/Nginx'
     targetRevision: HEAD
     path: dev
   destination:
