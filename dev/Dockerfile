@@ -4,3 +4,4 @@ COPY index.html /usr/share/nginx/html/index.html
 COPY styles.css /usr/share/nginx/html/
 # Expose port 80
 EXPOSE 80
+EXPOSE 43
