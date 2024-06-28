@@ -35,6 +35,7 @@ Ce projet de fin d'étude consiste à mettre en place une infrastructure moderne
 ```bash
 git clone https://github.com/votre-utilisateur/votre-repo.git
 cd PFE
+```
 ### 2. Configuration du cluster Kubernetes
 
 - Installer Kubernetes avec kubeadm et configurer le cluster avec 1 nœud maître et 2 nœuds travailleurs.
@@ -47,6 +48,8 @@ cd PFE
 ```bash
 docker build -t billane/demo:latest .
 docker push billane/demo:latest
+```
+
 
 
 
