@@ -8,13 +8,6 @@ Ce projet de fin d'étude consiste à mettre en place une infrastructure moderne
 
 - [Prérequis](#prérequis)
 - [Installation](#installation)
-- [Utilisation](#utilisation)
-- [Structure du projet](#structure-du-projet)
-- [CI/CD Pipeline](#cicd-pipeline)
-- [Monitoring](#monitoring)
-- [Contributions](#contributions)
-- [Licence](#licence)
-- [Auteur](#auteur)
 
 ## Prérequis
 
@@ -48,6 +41,26 @@ cd PFE
 ```bash
 docker build -t billane/demo:latest .
 docker push billane/demo:latest
+```
+
+### 4.Déployer l'application sur le cluster Kubernetes.
+
+```bash
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+```
+### 5. Mise en place de la CI/CD
+#### CI
+Configurer GitHub Actions pour automatiser le processus de build et de déploiement.
+#### CD
+- Installer Argo CD
+- Configurer le file Application.yaml
+### 6. Configuration du monitoring
+Déployer Prometheus, Grafana et Alertmanager sur le cluster Kubernetes.
+```bash
+helm install prometheus stable/prometheus
+helm install grafana stable/grafana
+kubectl apply -f alertmanager-config.yaml
 ```
 
 
