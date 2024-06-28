@@ -34,6 +34,19 @@ Ce projet de fin d'étude consiste à mettre en place une infrastructure moderne
 
 ```bash
 git clone https://github.com/votre-utilisateur/votre-repo.git
-cd votre-repo
+cd PFE
+### 2. Configuration du cluster Kubernetes
+
+- Installer Kubernetes avec kubeadm et configurer le cluster avec 1 nœud maître et 2 nœuds travailleurs.
+- Installer Containerd comme runtime de conteneur.
+
+### 3. Déploiement de l'application
+
+- Construire et pousser l'image Docker dans le dépôt privé Docker Hub.
+
+```bash
+docker build -t billane/demo:latest .
+docker push billane/demo:latest
+
 
 
