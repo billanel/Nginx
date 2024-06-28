@@ -1,0 +1,61 @@
+global:
+  resolve_timeout: 5m
+  smtp_smarthost: 'smtp.example.com:587'
+  smtp_from: 'alertmanager@example.com'
+  smtp_auth_username: 'alertmanager'
+  smtp_auth_password: 'password'
+
+route:
+  receiver: 'default-receiver'
+  group_by: ['alertname']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 3h
+  routes:
+    - match:
+        alertname: 'HighCPUUsage'
+      receiver: 'slack-notifications'
+      group_wait: 10s
+      group_interval: 1m
+      repeat_interval: 30m
+    - match_re:
+        alertname: 'Node(.*)Down'
+      receiver: 'email-notifications'
+      group_wait: 10s
+      group_interval: 1m
+      repeat_interval: 30m
+    - match:
+        severity: 'critical'
+      receiver: 'pagerduty'
+      continue: true
+    - match:
+        severity: 'warning'
+      receiver: 'slack-notifications'
+
+receivers:
+  - name: 'default-receiver'
+    email_configs:
+      - to: 'default@example.com'
+        send_resolved: true
+  - name: 'slack-notifications'
+    slack_configs:
+      - api_url: 'https://hooks.slack.com/services/your/slack/webhook/url'
+        channel: '#alerts'
+        title: '{{ .CommonAnnotations.summary }}'
+        text: '{{ .CommonAnnotations.description }}'
+        send_resolved: true
+  - name: 'email-notifications'
+    email_configs:
+      - to: 'ops@example.com'
+        send_resolved: true
+  - name: 'pagerduty'
+    pagerduty_configs:
+      - service_key: 'your-pagerduty-service-key'
+        send_resolved: true
+
+inhibit_rules:
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'instance']
